@@ -11,4 +11,4 @@ Finally, welcome to indicate defects in the APP and I'll try to polish them.
 
 --------------------------------------------------------------------------------------------------------------------
 
-                                                                                            ---- THIS APP IS STILL UNDER DEVELOPMENT
+                                  ---- THIS APP IS STILL UNDER DEVELOPMENT
