@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new recycleViewAdapter(data);
+        adapter = new recycleViewAdapter(data, this);
         recyclerView.setAdapter(adapter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
