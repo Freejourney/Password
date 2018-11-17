@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dd.morphingbutton.MorphingButton;
+
 /**
  * Created by mamadhaxor on 22/01/15.
  */
@@ -60,13 +62,22 @@ public class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.
     {
 //        public TextView firstText;
         public ImageView imageView;
-        public Button btn_getpasswd;
+        public MorphingButton btn_getpasswd;
         public View view;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.view = itemView;
-            btn_getpasswd = (Button)view.findViewById(R.id.btn_getpasswd);
+            btn_getpasswd = (MorphingButton)view.findViewById(R.id.btn_getpasswd);
+            MorphingButton.Params circle = MorphingButton.Params.create()
+                    .duration(500)
+                    .cornerRadius(R.dimen.mb_height_56) // 56 dp
+                    .width(R.dimen.mb_height_56) // 56 dp
+                    .height(R.dimen.mb_height_56) // 56 dp
+                    .color(R.color.mb_green) // normal state color
+                    .colorPressed(R.color.mb_green_dark) // pressed state color
+                    .icon(R.drawable.ic_done); // icon
+            btn_getpasswd.morph(circle);
             imageView = (ImageView)view.findViewById(R.id.image);
         }
     }

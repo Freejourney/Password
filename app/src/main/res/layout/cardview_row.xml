@@ -31,16 +31,14 @@
             android:layout_width="5dp"
             android:layout_height="match_parent"/>
 
-        <Button
+        <com.dd.morphingbutton.MorphingButton
             android:id="@+id/btn_getpasswd"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignTop="@+id/partager"
             android:layout_centerHorizontal="true"
             android:background="#adc"
-            android:layout_margin="3dp"
-            android:text="Details"
-            android:textColor="@color/primary" />
+            android:layout_margin="3dp" />
 
     </LinearLayout>
 
