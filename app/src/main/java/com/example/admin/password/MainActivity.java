@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ItemsModelList data = new ItemsModelList();
+    private String password = "";
 
 
     @Override

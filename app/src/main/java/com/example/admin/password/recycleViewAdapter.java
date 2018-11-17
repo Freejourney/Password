@@ -1,5 +1,6 @@
 package com.example.admin.password;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by mamadhaxor on 22/01/15.
@@ -32,6 +34,12 @@ public class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.
     private Context context;
 
     private Map<Integer, Integer> mStatus = new HashMap<>();
+    private String password = "";
+
+
+    public String getPassword() {
+        return password;
+    }
 
 
     recycleViewAdapter(ItemsModelList data, Context context)
@@ -67,17 +75,26 @@ public class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.
         viewHolder.btn_getpasswd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("data", data);
-                bundle.putInt("pos", i);
-                Intent intent = new Intent(viewHolder.view.getContext(), DetailActivity.class);
-                intent.putExtras(bundle);
-                viewHolder.view.getContext().startActivity(intent);
-                */
+
+                String str="zxcvbnmlkjhgfdsaqwertyuiopQWERTYUIOPASDFGHJKLZXCVBNM1234567890~!@#$%^&*()_+{}|:><?";
+                int length = str.length();
+                //由Random生成随机数
+                Random random=new Random();
+                StringBuffer sb=new StringBuffer();
+                //长度为几就循环几次
+                for(int i=0; i<11; ++i) {
+                    //产生0-61的数字
+                    int number = random.nextInt(length);
+                    //将产生的数字通过length次承载到sb中
+                    sb.append(str.charAt(number));
+                }
+                password = sb.toString();
+                ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                // 将文本内容放到系统剪贴板里。
+                cm.setText(password);
                 onMorphButton1Clicked(viewHolder.btn_getpasswd, i);
 
-                Log.i("Clicked on item", "just clicked on item "+ i);
+                Toast.makeText(context, "password extract success", Toast.LENGTH_LONG);
             }
         });
     }
