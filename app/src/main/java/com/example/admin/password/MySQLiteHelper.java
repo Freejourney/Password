@@ -137,6 +137,6 @@ import java.util.List;
 
          db.close();
 
-         Log.d("deletePwd", password.toString());
+         Log.d("deletePassword", password.toString());
     }
 }
