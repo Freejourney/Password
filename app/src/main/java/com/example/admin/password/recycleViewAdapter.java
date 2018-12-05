@@ -4,6 +4,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.IntegerRes;
@@ -25,8 +26,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-/**
- * Created by mamadhaxor on 22/01/15.
+/*
+ * 文件名：recycleViewAdapter
+ * 作者：created by admin on 2018 十一月
+ * 描述：
+ *      从数据库中读取出数据并显示于屏幕上
  */
 public class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.ViewHolder>
 {
@@ -68,33 +72,19 @@ public class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-        ItemsModel itemsModel = data.getItem(i);
+        final ItemsModel itemsModel = data.getItem(i);
         Bitmap bitmap = BitmapFactory.decodeResource(viewHolder.view.getResources(), itemsModel.getImage());
         viewHolder.imageView.setImageBitmap(bitmap);
+
+        viewHolder.btn_getpasswd.setBackgroundColor(itemsModel.getBtn_color());
         morphToSquare(viewHolder.btn_getpasswd, 0);
         viewHolder.btn_getpasswd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String str="zxcvbnmlkjhgfdsaqwertyuiopQWERTYUIOPASDFGHJKLZXCVBNM1234567890~!@#$%^&*()_+{}|:><?";
-                int length = str.length();
-                //由Random生成随机数
-                Random random=new Random();
-                StringBuffer sb=new StringBuffer();
-                //长度为几就循环几次
-                for(int i=0; i<11; ++i) {
-                    //产生0-61的数字
-                    int number = random.nextInt(length);
-                    //将产生的数字通过length次承载到sb中
-                    sb.append(str.charAt(number));
-                }
-                password = sb.toString();
+                password = itemsModel.getPwd().getPassword();
                 ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
                 // 将文本内容放到系统剪贴板里。
                 cm.setText(password);
-                onMorphButton1Clicked(viewHolder.btn_getpasswd, i);
-
-                Toast.makeText(context, "password extract success", Toast.LENGTH_LONG);
             }
         });
     }

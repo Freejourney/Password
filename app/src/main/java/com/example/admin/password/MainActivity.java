@@ -2,9 +2,11 @@ package com.example.admin.password;
 
 import android.Manifest;
 import android.app.KeyguardManager;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +27,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,11 +42,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        data.addItem(new ItemsModel(R.drawable.bg));
-        data.addItem(new ItemsModel(R.drawable.bg));
-        data.addItem(new ItemsModel(R.drawable.bg));
-        data.addItem(new ItemsModel(R.drawable.bg));
-        data.addItem(new ItemsModel(R.drawable.bg));
         setContentView(R.layout.activity_main);
 
         recyclerView = (RecyclerView)findViewById(R.id.my_recycler_view);
@@ -60,10 +59,45 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                data.addItem(new ItemsModel(R.drawable.bg));
+
+
+                String str="zxcvbnmlkjhgfdsaqwertyuiopQWERTYUIOPASDFGHJKLZXCVBNM1234567890~!@#$%^&*()_+{}|:><?";
+                int length = str.length();
+                //由Random生成随机数
+                Random random=new Random();
+                StringBuffer sb=new StringBuffer();
+                //长度为几就循环几次
+                for(int i=0; i<11; ++i) {
+                    //产生0-61的数字
+                    int number = random.nextInt(length);
+                    //将产生的数字通过length次承载到sb中
+                    sb.append(str.charAt(number));
+                }
+                password = sb.toString();
+
+                Pwd pwd = new Pwd();
+                pwd.setId(password);
+                pwd.setAppname("default_name");
+                pwd.setPassword(password);
+
+                MySQLiteHelper mySQLiteHelper = new MySQLiteHelper(MainActivity.this);
+                mySQLiteHelper.addPassword(pwd);
+
+                ClipboardManager cm = (ClipboardManager) MainActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
+                // 将文本内容放到系统剪贴板里。
+                cm.setText(password);
+
+                int r = random.nextInt(256);
+                int g = random.nextInt(256);
+                int b = random.nextInt(256);
+
+                Toast.makeText(MainActivity.this, "password extract success", Toast.LENGTH_LONG);
+                data.addItem(new ItemsModel(R.drawable.bg, pwd, Color.rgb(r, g, b)));
                 adapter.notifyDataSetChanged();
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
 

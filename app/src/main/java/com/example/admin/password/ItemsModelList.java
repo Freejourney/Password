@@ -11,19 +11,23 @@ public class ItemsModelList implements Serializable
 {
     private int itemCount = 0;
     private List<ItemsModel> itemsModels;
+
     public ItemsModelList()
     {
         itemsModels = new ArrayList<ItemsModel>();
     }
+
     public void addItem(ItemsModel itemsModel)
     {
         itemsModels.add(itemsModel);
         itemCount++;
     }
+
     public int getItemCount()
     {
         return itemsModels.size();
     }
+
     public ItemsModel getItem(int index)
     {
         return itemsModels.get(index);

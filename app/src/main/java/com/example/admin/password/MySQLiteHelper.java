@@ -82,7 +82,7 @@ import java.util.List;
             cursor.moveToFirst();
 
         Pwd pwd = new Pwd();
-        pwd.setId(Integer.parseInt(cursor.getString(0)));
+        pwd.setId(cursor.getString(0));
         pwd.setAppname(cursor.getString(1));
         pwd.setPassword(cursor.getString(2));
 
@@ -103,7 +103,7 @@ import java.util.List;
          if (cursor.moveToFirst()) {
              do {
                  password = new Pwd();
-                 password.setId(Integer.parseInt(cursor.getString(0)));
+                 password.setId(cursor.getString(0));
                  password.setAppname(cursor.getString(1));
                  password.setPassword(cursor.getString(2));
 
