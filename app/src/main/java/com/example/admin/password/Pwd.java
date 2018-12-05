@@ -5,6 +5,7 @@ public class Pwd {
     private String id;
     private String appname;
     private String password;
+    private int pwdcolor;       // 下一步：将颜色加入数据库
 
     public String getId() {
         return id;
@@ -12,6 +13,14 @@ public class Pwd {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getPwdcolor() {
+        return pwdcolor;
+    }
+
+    public void setPwdcolor(int pwdcolor) {
+        this.pwdcolor = pwdcolor;
     }
 
     public String getAppname() {

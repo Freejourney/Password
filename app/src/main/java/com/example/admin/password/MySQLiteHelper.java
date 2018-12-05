@@ -38,7 +38,8 @@ import java.util.List;
         String CREATE_PASSWORD_TABLE = "create table passwords (" +
                                     "id     integer primary key autoincrement," +
                                     "appname  text," +
-                                    "password text )";
+                                    "pwdcolor text," +
+                                    "password text)";
         db.execSQL(CREATE_PASSWORD_TABLE);
     }
 

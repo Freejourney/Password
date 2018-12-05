@@ -75,9 +75,7 @@ public class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.
         final ItemsModel itemsModel = data.getItem(i);
         Bitmap bitmap = BitmapFactory.decodeResource(viewHolder.view.getResources(), itemsModel.getImage());
         viewHolder.imageView.setImageBitmap(bitmap);
-
         viewHolder.btn_getpasswd.setBackgroundColor(itemsModel.getBtn_color());
-        morphToSquare(viewHolder.btn_getpasswd, 0);
         viewHolder.btn_getpasswd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +83,8 @@ public class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.
                 ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
                 // 将文本内容放到系统剪贴板里。
                 cm.setText(password);
+
+                Toast.makeText(context, "Password Get Success", Toast.LENGTH_LONG);
             }
         });
     }

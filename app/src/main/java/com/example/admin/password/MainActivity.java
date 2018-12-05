@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
@@ -36,8 +37,9 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ItemsModelList data = new ItemsModelList();
+    private List<Pwd> pwdsList;
     private String password = "";
-
+    private MySQLiteHelper mySQLiteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,12 @@ public class MainActivity extends AppCompatActivity
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+        mySQLiteHelper = new MySQLiteHelper(MainActivity.this);
+        pwdsList = mySQLiteHelper.getAllPasswords();
+        for (int i = 0; i < pwdsList.size(); i++) {
+            data.addItem(new ItemsModel(R.drawable.bg, pwdsList.get(i), pwdsList.get(i).getPwdcolor()));
+        }
 
         adapter = new recycleViewAdapter(data, this);
         recyclerView.setAdapter(adapter);
