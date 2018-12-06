@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ItemsModelList data = new ItemsModelList();
-    private List<Pwd> pwdsList;
+    private List<Pwd> pwdsList = new ArrayList<Pwd>();
     private String password = "";
     private MySQLiteHelper mySQLiteHelper;
 
@@ -51,12 +52,6 @@ public class MainActivity extends AppCompatActivity
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        mySQLiteHelper = new MySQLiteHelper(MainActivity.this);
-        pwdsList = mySQLiteHelper.getAllPasswords();
-        for (int i = 0; i < pwdsList.size(); i++) {
-            data.addItem(new ItemsModel(R.drawable.bg, pwdsList.get(i), pwdsList.get(i).getPwdcolor()));
-        }
 
         adapter = new recycleViewAdapter(data, this);
         recyclerView.setAdapter(adapter);
@@ -82,11 +77,15 @@ public class MainActivity extends AppCompatActivity
                     sb.append(str.charAt(number));
                 }
                 password = sb.toString();
+                int r = random.nextInt(256);
+                int g = random.nextInt(256);
+                int b = random.nextInt(256);
 
                 Pwd pwd = new Pwd();
                 pwd.setId(password);
                 pwd.setAppname("default_name");
                 pwd.setPassword(password);
+                pwd.setPwdcolor(Color.rgb(r, g, b));
 
                 MySQLiteHelper mySQLiteHelper = new MySQLiteHelper(MainActivity.this);
                 mySQLiteHelper.addPassword(pwd);
@@ -95,9 +94,7 @@ public class MainActivity extends AppCompatActivity
                 // 将文本内容放到系统剪贴板里。
                 cm.setText(password);
 
-                int r = random.nextInt(256);
-                int g = random.nextInt(256);
-                int b = random.nextInt(256);
+
 
                 Toast.makeText(MainActivity.this, "password extract success", Toast.LENGTH_LONG);
                 data.addItem(new ItemsModel(R.drawable.bg, pwd, Color.rgb(r, g, b)));
@@ -118,6 +115,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        mySQLiteHelper = new MySQLiteHelper(MainActivity.this);
+        pwdsList.addAll(mySQLiteHelper.getAllPasswords());
+        for (int i = 0; i < pwdsList.size(); i++) {
+            data.addItem(new ItemsModel(R.drawable.bg, pwdsList.get(i), pwdsList.get(i).getPwdcolor()));
+        }
     }
 
     @Override

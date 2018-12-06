@@ -16,7 +16,7 @@ import java.util.List;
  * 描述：
  */public class MySQLiteHelper extends SQLiteOpenHelper {
 
-     private static final int DATABASE_VERSION = 1;
+     private static final int DATABASE_VERSION = 2;
      private static final String DATABASE_NAME = "PasswordDB";
 
      private static final String TABLE_PASSWORDS = "passwords";
@@ -24,8 +24,9 @@ import java.util.List;
      private static final String KEY_ID = "id";
      private static final String KEY_APPNAME = "appname";
      private static final String KEY_PASSWORD = "password";
+     private static final String KEY_PWDCOLOR = "pwdcolor";
 
-     private static final String[] columns = {KEY_ID, KEY_APPNAME, KEY_PASSWORD};
+     private static final String[] columns = {KEY_ID, KEY_APPNAME, KEY_PASSWORD, KEY_PWDCOLOR};
 
      // MySQLiteHelper constructor must call the super class constructor
      public MySQLiteHelper(Context context) {
@@ -38,8 +39,9 @@ import java.util.List;
         String CREATE_PASSWORD_TABLE = "create table passwords (" +
                                     "id     integer primary key autoincrement," +
                                     "appname  text," +
-                                    "pwdcolor text," +
-                                    "password text)";
+                                    "password text," +
+                                    "pwdcolor text)";
+                                    ;
         db.execSQL(CREATE_PASSWORD_TABLE);
     }
 
@@ -61,6 +63,7 @@ import java.util.List;
         ContentValues values = new ContentValues();
         values.put(KEY_APPNAME, password.getAppname());
         values.put(KEY_PASSWORD, password.getPassword());
+        values.put(KEY_PWDCOLOR, String.valueOf(password.getPwdcolor()));
 
         // 3. insert
         db.insert(TABLE_PASSWORDS, null, values);
@@ -86,6 +89,7 @@ import java.util.List;
         pwd.setId(cursor.getString(0));
         pwd.setAppname(cursor.getString(1));
         pwd.setPassword(cursor.getString(2));
+        pwd.setPwdcolor(Integer.parseInt(cursor.getString(3)));
 
         Log.d("getPassword("+id+")", pwd.toString());
 
@@ -107,6 +111,7 @@ import java.util.List;
                  password.setId(cursor.getString(0));
                  password.setAppname(cursor.getString(1));
                  password.setPassword(cursor.getString(2));
+                 password.setPwdcolor(Integer.parseInt(cursor.getString(3)));
 
                  passwords.add(password);
              } while (cursor.moveToNext());
@@ -123,6 +128,7 @@ import java.util.List;
          ContentValues values = new ContentValues();
          values.put("appname", password.getAppname());
          values.put("password", password.getPassword());
+         values.put("pwdcolor", password.getPwdcolor());
 
          int i = db.update(TABLE_PASSWORDS, values, KEY_ID+" = ?", new String[] {String.valueOf(password.getId())});
 
