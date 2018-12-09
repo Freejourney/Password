@@ -1,4 +1,4 @@
-package com.example.admin.password;
+package com.example.admin.password.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,13 +6,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
-import android.view.View;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.admin.password.R;
+import com.example.admin.password.utils.FingerPrintUtils;
 
 /*
  * 文件名：FingerActivity

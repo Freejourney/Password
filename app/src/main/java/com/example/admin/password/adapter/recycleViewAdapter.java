@@ -1,30 +1,28 @@
-package com.example.admin.password;
+package com.example.admin.password.adapter;
 
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.IntegerRes;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dd.morphingbutton.MorphingButton;
+import com.example.admin.password.Bean.ItemsModel;
+import com.example.admin.password.activities.MainActivity;
+import com.example.admin.password.utils.ItemsModelList;
+import com.example.admin.password.R;
+import com.example.admin.password.utils.MyToast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /*
  * 文件名：recycleViewAdapter
@@ -46,7 +44,7 @@ public class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.
     }
 
 
-    recycleViewAdapter(ItemsModelList data, Context context)
+    public recycleViewAdapter(ItemsModelList data, Context context)
     {
         this.data = data;
         this.context = context;
@@ -76,6 +74,7 @@ public class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.
         Bitmap bitmap = BitmapFactory.decodeResource(viewHolder.view.getResources(), itemsModel.getImage());
         viewHolder.imageView.setImageBitmap(bitmap);
         viewHolder.btn_getpasswd.setBackgroundColor(itemsModel.getBtn_color());
+        viewHolder.btn_getpasswd.setText(String.valueOf(i+1));
         viewHolder.btn_getpasswd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +83,7 @@ public class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.
                 // 将文本内容放到系统剪贴板里。
                 cm.setText(password);
 
-                Toast.makeText(context, "Password Get Success", Toast.LENGTH_LONG);
+                MyToast.showOnUIThreadx(context, "password extract success", Toast.LENGTH_LONG);
             }
         });
     }

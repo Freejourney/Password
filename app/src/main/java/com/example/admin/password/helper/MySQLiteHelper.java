@@ -1,4 +1,4 @@
-package com.example.admin.password;
+package com.example.admin.password.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.example.admin.password.Bean.Pwd;
 
 import java.util.LinkedList;
 import java.util.List;

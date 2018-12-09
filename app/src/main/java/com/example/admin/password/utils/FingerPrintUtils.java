@@ -1,4 +1,4 @@
-package com.example.admin.password;
+package com.example.admin.password.utils;
 
 /*
  * 文件名：FingerPrintUtils

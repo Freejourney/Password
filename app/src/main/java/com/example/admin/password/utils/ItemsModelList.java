@@ -1,4 +1,6 @@
-package com.example.admin.password;
+package com.example.admin.password.utils;
+
+import com.example.admin.password.Bean.ItemsModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;

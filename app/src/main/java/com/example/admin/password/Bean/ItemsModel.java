@@ -1,6 +1,6 @@
-package com.example.admin.password;
+package com.example.admin.password.Bean;
 
-import android.graphics.Color;
+import com.example.admin.password.Bean.Pwd;
 
 import java.io.Serializable;
 

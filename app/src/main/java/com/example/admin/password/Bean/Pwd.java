@@ -1,4 +1,4 @@
-package com.example.admin.password;
+package com.example.admin.password.Bean;
 
 public class Pwd {
 
